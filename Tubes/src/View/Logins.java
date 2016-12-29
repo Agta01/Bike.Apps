@@ -5,19 +5,16 @@
  */
 package View;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-
 /**
  *
- * @author Igun Wiguna
+ * @author Trias Fachrul Z
  */
-public class Login extends javax.swing.JFrame {
+public class Logins extends javax.swing.JFrame {
 
     /**
-     * Creates new form Login
+     * Creates new form Logins
      */
-    public Login() {
+    public Logins() {
         initComponents();
     }
 
@@ -35,6 +32,8 @@ public class Login extends javax.swing.JFrame {
         passwordText = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         notifeLabel = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BtnLogin.setText("Masuk");
         BtnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -59,8 +58,8 @@ public class Login extends javax.swing.JFrame {
 
         notifeLabel.setText("jLabel2");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -96,6 +95,8 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(notifeLabel)
                 .addGap(61, 61, 61))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
@@ -105,16 +106,18 @@ public class Login extends javax.swing.JFrame {
 
     private void usernameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextActionPerformed
         // TODO add your handling code here:
-        
-        
+
     }//GEN-LAST:event_usernameTextActionPerformed
 
     private void passwordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_passwordTextActionPerformed
 
-     public static void main(String args[]) throws MalformedURLException, IOException {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -122,35 +125,26 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("WindowsLookAndFeel".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-//        try {
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-//        } catch (Exception e) {
-//            System.out.println("UIManager Exception : " + e);
-//        }
         /* Create and display the form */
-        
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Login login = new Login();
-//                new LoginControl().setFrameIcon(login);
-                login.setVisible(true);
+                new Logins().setVisible(true);
             }
         });
     }
