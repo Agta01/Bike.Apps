@@ -11,6 +11,8 @@ package Connect;
  */
 public class TestConnection {
     public static void main(String[] args) {
-       ConnectDB.getConnectDB();
+       ConnectDB c = new ConnectDB();
+       
+        System.out.println(c.getConnection());
     }
 }
