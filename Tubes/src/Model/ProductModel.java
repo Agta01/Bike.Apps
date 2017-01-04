@@ -8,6 +8,10 @@ package Model;
 import Connect.ConnectDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +23,7 @@ public class ProductModel {
     String name;
     String stock;
     String price;
+    private Connection conn;
 
     public String getId() {
         return id;
@@ -78,5 +83,35 @@ public class ProductModel {
 
         return toReturn;
     }
+    
+    public ArrayList<ProductModel> selectProduct(){
+        ArrayList<ProductModel> productList = new ArrayList<>();
+        String query = "SELECT * FROM product";
+        
+//        KONEKSI
+        conn = ConnectDB.getInstance().getConnection();
+        
+        if (conn != null) {
+           try{
+               PreparedStatement pst = conn.prepareStatement(query);
+               
+               ResultSet rs;
+               rs = pst.executeQuery();
+               
+               while (rs.next()) {
+                    ProductModel product = new ProductModel();
+                    product.setId(rs.getString("id"));
+                    product.setName(rs.getString("prod_name"));
+                    product.setStock(rs.getString("prod_stock"));
+                    product.setPrice(rs.getString("prod_price"));
+                }
+                conn.close();
+                return productList;
+           }catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }
+        return null;
+    } 
 
 }

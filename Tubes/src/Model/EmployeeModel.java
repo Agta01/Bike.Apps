@@ -5,22 +5,27 @@
  */
 package Model;
 
+import Connect.ConnectDB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author sulistiana
  */
 public class EmployeeModel {
-    int id;
-    String emp_name;
-    String emp_status;
+    String id;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
+    String emp_name;
+    String emp_status;
 
     public String getEmp_name() {
         return emp_name;
@@ -38,5 +43,34 @@ public class EmployeeModel {
         this.emp_status = emp_status;
     }
     
-    
+    public boolean insertEmployee() throws SQLException{
+        boolean toReturn = false;
+        
+        try{
+//            sql insert
+            String query = "INSERT INTO employee (id, emp_name, emp_status "+"VALUE (?, ?, ?)";
+            Connection conn = ConnectDB.getInstance().getConnection();
+            
+            if (conn != null) {
+                // create the mysql insert preparedstatement
+                PreparedStatement pst;
+                pst = conn.prepareStatement(query);
+                pst.setString(1, null);
+                pst.setString(2, emp_name);
+                pst.setString(3, emp_status);
+
+                // execute the preparedstatement
+                pst.execute();
+
+                conn.close();
+                toReturn = true;
+            }
+            
+            
+        }catch(SQLException e){
+            System.out.println("error : " + e.getMessage());
+        }
+        
+        return toReturn;
+    }
 }
