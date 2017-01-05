@@ -84,34 +84,46 @@ public class ProductModel {
         return toReturn;
     }
     
-    public ArrayList<ProductModel> selectProduct(){
+    public ArrayList<ProductModel> showProduct(){
         ArrayList<ProductModel> productList = new ArrayList<>();
         String query = "SELECT * FROM product";
         
-//        KONEKSI
         conn = ConnectDB.getInstance().getConnection();
+        PreparedStatement pst;
+        ResultSet rs;
         
         if (conn != null) {
-           try{
-               PreparedStatement pst = conn.prepareStatement(query);
-               
-               ResultSet rs;
-               rs = pst.executeQuery();
-               
-               while (rs.next()) {
+            try{
+                 pst = conn.prepareStatement(query);
+            
+                rs = pst.executeQuery();
+            
+                while (rs.next()){
                     ProductModel product = new ProductModel();
                     product.setId(rs.getString("id"));
                     product.setName(rs.getString("prod_name"));
                     product.setStock(rs.getString("prod_stock"));
                     product.setPrice(rs.getString("prod_price"));
+                    productList.add(product);
                 }
+                
                 conn.close();
                 return productList;
-           }catch (SQLException ex) {
+            }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, ex);
             }
-        }
+           
+        }  
         return null;
-    } 
+    }
+
+    @Override
+    public String toString() {
+        return "ProductModel{"+"id= "+id+", prod_name= "+name+", prod_stock= "+stock+", prod_price"
++price+'}';    
+    }
+    
+    
+    
 
 }
