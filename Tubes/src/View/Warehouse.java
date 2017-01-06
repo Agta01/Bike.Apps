@@ -6,7 +6,10 @@
 package View;
 
 import Controller.ProductController;
+import View.Warehouse;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,13 +24,13 @@ public class Warehouse extends javax.swing.JFrame {
      */
     public Warehouse() {
         initComponents();
-        productController.populateTable(jTable1);
+//        productController.populateTable(warehouseTable);
         
     }
     
-    public JTable getProductTable(){
-        return jTable1;
-    }
+//    public JTable getProductTable(){
+//        return warehouseTable;
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +42,7 @@ public class Warehouse extends javax.swing.JFrame {
 
         search = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        warehouseTable = new javax.swing.JTable();
         addBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         changeBtn = new javax.swing.JButton();
@@ -48,15 +51,16 @@ public class Warehouse extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        warehouseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {"1", "Teh Pucuk", "3", "50000"},
+                {"2", "Teh Mecin", "4", null}
             },
             new String [] {
                 "No", "Nama Barang", "Jumlah Barang", "Harga Barang"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(warehouseTable);
 
         addBtn.setText("Tambah");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +134,15 @@ public class Warehouse extends javax.swing.JFrame {
     private void changeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeBtnActionPerformed
         // TODO add your handling code here:
         WarehouseUpdate a = new WarehouseUpdate();
-        a.setVisible(true);
+//        a.setVisible(true);
+        DefaultTableModel dtm = (DefaultTableModel) warehouseTable.getModel();
+        
+        if (warehouseTable.getSelectedRowCount() <= 0) {
+            JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel");     
+        } else {
+            a.setVisible(true);
+        }
+        
         
     }//GEN-LAST:event_changeBtnActionPerformed
 
@@ -183,8 +195,8 @@ public class Warehouse extends javax.swing.JFrame {
     private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField search;
+    private javax.swing.JTable warehouseTable;
     // End of variables declaration//GEN-END:variables
 
     private WarehouseInsert WarehouseInsert() {

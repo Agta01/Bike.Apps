@@ -7,6 +7,7 @@ package Controller;
 
 import Model.ProductModel;
 import View.WarehouseInsert;
+import View.Warehouse;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import View.Warehouse;
@@ -31,6 +32,19 @@ public class ProductController {
             warehouseInsert.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Gagal menyimpan data !");
+        }
+    }
+    
+    public static void update(WarehouseInsert warehouseInsert) {
+        productModel.setName(warehouseInsert.getInputNama().getText());
+        productModel.setStock(warehouseInsert.getInputJumlah().getText());
+        productModel.setPrice(warehouseInsert.getInputHarga().getText());
+        
+        if (productModel.updateProduct()) {
+            JOptionPane.showMessageDialog(null, "Data berhasil di ubah !");
+            warehouseInsert.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Gagal mengubah data !");
         }
     }
     

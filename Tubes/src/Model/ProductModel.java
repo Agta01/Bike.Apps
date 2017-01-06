@@ -84,6 +84,37 @@ public class ProductModel {
         return toReturn;
     }
     
+    public boolean updateProduct () {
+        boolean toReturn = false;
+        try {
+            
+            String sql = "UPDATE product "
+                    +"id, "
+                    +"prod_name, "
+                    +"prod_stock"
+                    +"prod_price"
+                    +"WHERE id = ?";
+            Connection conn = ConnectDB.getInstance().getConnection();
+            if (conn != null) {
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1, id);
+                pst.setString(2, name);
+                pst.setString(3, stock);
+                pst.setString(4, price);
+
+                // execute the preparedstatement
+                pst.execute();
+
+                conn.close();
+                toReturn = true;
+            }
+            
+        } catch (Exception e){
+            System.out.println("Error : " + e.getMessage());
+        }
+        return toReturn;
+    }
+    
     public ArrayList<ProductModel> selectProduct(){
         ArrayList<ProductModel> productList = new ArrayList<>();
         String query = "SELECT * FROM product";

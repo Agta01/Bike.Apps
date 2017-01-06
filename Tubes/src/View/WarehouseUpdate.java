@@ -5,6 +5,12 @@
  */
 package View;
 
+import Controller.ProductController;
+import View.WarehouseInsert;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Igun Wiguna
@@ -17,6 +23,80 @@ public class WarehouseUpdate extends javax.swing.JFrame {
     public WarehouseUpdate() {
         initComponents();
     }
+
+    public JButton getCloseBtn() {
+        return closeBtn;
+    }
+
+    public void setCloseBtn(JButton closeBtn) {
+        this.closeBtn = closeBtn;
+    }
+
+    public JLabel getHargaText() {
+        return hargaText;
+    }
+
+    public void setHargaText(JLabel hargaText) {
+        this.hargaText = hargaText;
+    }
+
+    public JTextField getInputHarga() {
+        return inputHarga;
+    }
+
+    public void setInputHarga(JTextField inputHarga) {
+        this.inputHarga = inputHarga;
+    }
+
+    public JTextField getInputJumlah() {
+        return inputJumlah;
+    }
+
+    public void setInputJumlah(JTextField inputJumlah) {
+        this.inputJumlah = inputJumlah;
+    }
+
+    public JTextField getInputNama() {
+        return inputNama;
+    }
+
+    public void setInputNama(JTextField inputNama) {
+        this.inputNama = inputNama;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(JLabel jumlah) {
+        this.jumlah = jumlah;
+    }
+
+    public JLabel getNamaText() {
+        return namaText;
+    }
+
+    public void setNamaText(JLabel namaText) {
+        this.namaText = namaText;
+    }
+
+    public JButton getSaveBtn() {
+        return saveBtn;
+    }
+
+    public void setSaveBtn(JButton saveBtn) {
+        this.saveBtn = saveBtn;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,8 +112,6 @@ public class WarehouseUpdate extends javax.swing.JFrame {
         inputHarga = new javax.swing.JTextField();
         saveBtn = new javax.swing.JButton();
         closeBtn = new javax.swing.JButton();
-        kodeText = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         namaText = new javax.swing.JLabel();
         jumlah = new javax.swing.JLabel();
@@ -54,11 +132,6 @@ public class WarehouseUpdate extends javax.swing.JFrame {
                 closeBtnActionPerformed(evt);
             }
         });
-
-        kodeText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        kodeText.setText("Kode    :");
-
-        jLabel2.setText("id_");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Ubah Barang");
@@ -98,13 +171,9 @@ public class WarehouseUpdate extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(inputHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(namaText)
-                                        .addComponent(kodeText))
+                                    .addComponent(namaText)
                                     .addGap(29, 29, 29)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                    .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,11 +181,7 @@ public class WarehouseUpdate extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kodeText)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(namaText)
                     .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,6 +210,8 @@ public class WarehouseUpdate extends javax.swing.JFrame {
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
+//        ProductController.update(this);
+        
         this.dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 
@@ -190,9 +257,7 @@ public class WarehouseUpdate extends javax.swing.JFrame {
     private javax.swing.JTextField inputJumlah;
     private javax.swing.JTextField inputNama;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jumlah;
-    private javax.swing.JLabel kodeText;
     private javax.swing.JLabel namaText;
     private javax.swing.JButton saveBtn;
     // End of variables declaration//GEN-END:variables

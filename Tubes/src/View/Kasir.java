@@ -34,7 +34,7 @@ public class Kasir extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        kasirTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         inputKodeBarang = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -43,7 +43,7 @@ public class Kasir extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        kasirTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", "001", "Alpukat", "2", "5000", "10000"},
                 {null, null, null, null, null, null},
@@ -54,7 +54,7 @@ public class Kasir extends javax.swing.JFrame {
                 "No", "Kode Item", "Nama Item", "Jumlah", "Harga", "Total Harga"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(kasirTable);
 
         jLabel1.setText("Masukan Kode Item");
 
@@ -163,7 +163,7 @@ public class Kasir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable kasirTable;
     private javax.swing.JLabel tampilTotalHarga;
     // End of variables declaration//GEN-END:variables
 }

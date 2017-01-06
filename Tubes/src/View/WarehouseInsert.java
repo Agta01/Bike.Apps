@@ -23,6 +23,8 @@ public class WarehouseInsert extends javax.swing.JFrame {
     public WarehouseInsert() {
         initComponents();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
