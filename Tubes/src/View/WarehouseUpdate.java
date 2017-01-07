@@ -20,8 +20,20 @@ public class WarehouseUpdate extends javax.swing.JFrame {
     /**
      * Creates new form WarehouseUpdate
      */
+    ProductController productController = new ProductController();
+    
     public WarehouseUpdate() {
         initComponents();
+        
+        
+    }
+
+    public JLabel getIdLabel() {
+        return idLabel;
+    }
+
+    public void setIdLabel(JLabel idLabel) {
+        this.idLabel = idLabel;
     }
 
     public JButton getCloseBtn() {
@@ -116,6 +128,8 @@ public class WarehouseUpdate extends javax.swing.JFrame {
         namaText = new javax.swing.JLabel();
         jumlah = new javax.swing.JLabel();
         hargaText = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        idLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,6 +159,9 @@ public class WarehouseUpdate extends javax.swing.JFrame {
         hargaText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         hargaText.setText("Harga  :");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("ID        :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,9 +188,13 @@ public class WarehouseUpdate extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(inputHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(namaText)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(namaText)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(29, 29, 29)
-                                    .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(idLabel)
+                                        .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -181,7 +202,11 @@ public class WarehouseUpdate extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(idLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(namaText)
                     .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -197,7 +222,7 @@ public class WarehouseUpdate extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn)
                     .addComponent(closeBtn))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -211,7 +236,7 @@ public class WarehouseUpdate extends javax.swing.JFrame {
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
 //        ProductController.update(this);
-        
+        productController.updateChange(this);        
         this.dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 
@@ -253,10 +278,12 @@ public class WarehouseUpdate extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeBtn;
     private javax.swing.JLabel hargaText;
+    private javax.swing.JLabel idLabel;
     private javax.swing.JTextField inputHarga;
     private javax.swing.JTextField inputJumlah;
     private javax.swing.JTextField inputNama;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jumlah;
     private javax.swing.JLabel namaText;
     private javax.swing.JButton saveBtn;

@@ -24,8 +24,7 @@ public class Warehouse extends javax.swing.JFrame {
      */
     public Warehouse() {
         initComponents();
-//        productController.populateTable(warehouseTable);
-        
+        productController.populateTable(warehouseTable);   
     }
     
 //    public JTable getProductTable(){
@@ -70,6 +69,11 @@ public class Warehouse extends javax.swing.JFrame {
         });
 
         deleteBtn.setText("Hapus");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
         changeBtn.setText("Ubah");
         changeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -133,14 +137,13 @@ public class Warehouse extends javax.swing.JFrame {
 
     private void changeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeBtnActionPerformed
         // TODO add your handling code here:
-        WarehouseUpdate a = new WarehouseUpdate();
-//        a.setVisible(true);
-        DefaultTableModel dtm = (DefaultTableModel) warehouseTable.getModel();
+        WarehouseUpdate warehouseUpdate= new WarehouseUpdate();
         
-        if (warehouseTable.getSelectedRowCount() <= 0) {
+        if (warehouseTable.getSelectedRowCount()== 0) {
             JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel");     
         } else {
-            a.setVisible(true);
+            productController.updateShow(warehouseTable);
+            
         }
         
         
@@ -149,8 +152,13 @@ public class Warehouse extends javax.swing.JFrame {
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
         WarehouseInsert wi = new WarehouseInsert();
+        
         wi.setVisible(true);        
     }//GEN-LAST:event_addBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
     /**
      * @param args the command line arguments

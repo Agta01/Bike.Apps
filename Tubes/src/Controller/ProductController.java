@@ -7,10 +7,9 @@ package Controller;
 
 import Model.ProductModel;
 import View.WarehouseInsert;
-import View.Warehouse;
+import View.WarehouseUpdate;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import View.Warehouse;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,9 +22,12 @@ public class ProductController {
     private static ProductModel productModel = new ProductModel();
 
     public static void tambahAnggota(WarehouseInsert warehouseInsert) {
+        int stock = Integer.parseInt(warehouseInsert.getInputJumlah().getText());
+        int price = Integer.parseInt(warehouseInsert.getInputHarga().getText());
+      
         productModel.setName(warehouseInsert.getInputNama().getText());
-        productModel.setStock(warehouseInsert.getInputJumlah().getText());
-        productModel.setPrice(warehouseInsert.getInputHarga().getText());
+        productModel.setStock(stock);
+        productModel.setPrice(price);
 
         if (productModel.insert()) {
             JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan !");
@@ -34,39 +36,68 @@ public class ProductController {
             JOptionPane.showMessageDialog(null, "Gagal menyimpan data !");
         }
     }
-    
-    public static void update(WarehouseInsert warehouseInsert) {
-        productModel.setName(warehouseInsert.getInputNama().getText());
-        productModel.setStock(warehouseInsert.getInputJumlah().getText());
-        productModel.setPrice(warehouseInsert.getInputHarga().getText());
+
+    public void updateShow(JTable table) {
+//        productModel.setName(table.getInputNama().getText());
+//        productModel.setStock(warehouseInsert.getInputJumlah().getText());
+//        productModel.setPrice(warehouseInsert.getInputHarga().getText());
         
-        if (productModel.updateProduct()) {
-            JOptionPane.showMessageDialog(null, "Data berhasil di ubah !");
-            warehouseInsert.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Gagal mengubah data !");
-        }
+        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+        WarehouseUpdate  wu = new WarehouseUpdate();
+        
+        int row = table.getSelectedRow();
+        wu.getIdLabel().setText(table.getValueAt(row, 0).toString());
+        wu.getInputNama().setText(table.getValueAt(row, 1).toString());        
+        wu.getInputJumlah().setText(table.getValueAt(row,2).toString());
+        wu.getInputHarga().setText(table.getValueAt(row, 3).toString());
+        
+        wu.setVisible(true);
+//        if (.updateProduct()) {
+//            JOptionPane.showMessageDialog(null, "Data berhasil di ubah !");
+//            warehouseInsert.dispose();
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Gagal mengubah data !");
+//        }
     }
-    
-    
-    public boolean populateTable(JTable jTable1){
-        ProductModel productModel = new ProductModel();
-        ArrayList<ProductModel> productList = productModel.selectProduct();
-        DefaultTableModel defaultTableModel = (DefaultTableModel) jTable1.getModel();
-        defaultTableModel.setRowCount(0);
-        int i = 1;
+
+    public void updateChange (WarehouseUpdate warehouseUpdate) {
+        int id = Integer.parseInt(warehouseUpdate.getIdLabel().getText());
+        int stock = Integer.parseInt(warehouseUpdate.getInputJumlah().getText());
+        int price = Integer.parseInt(warehouseUpdate.getInputHarga().getText());
+        productModel = new ProductModel();
         
-        for (ProductModel product : productList) {
+        
+        productModel.setId(id);
+        productModel.setName(warehouseUpdate.getInputNama().getText());
+        productModel.setStock(stock);
+        productModel.setPrice(price);
+        
+        
+        System.out.println(id);
+        productModel.updateProduct(productModel);
+
+
+        
+    }
+ 
+    public boolean populateTable(JTable jTable1){
+        ProductModel product = new ProductModel();
+        ArrayList<ProductModel> productList = product.showProduct();
+        DefaultTableModel defaultTableModel = (DefaultTableModel) jTable1.getModel();
+        
+        defaultTableModel.setRowCount(0);
+        
+        productList.forEach((products) -> {
             defaultTableModel.addRow(
+            
                     new Object[]{
-//                        i++,
-                        product.getId(),
-                        product.getName(),
-                        product.getStock(),
-                        product.getPrice()
+                        products.getId(),
+                        products.getName(),
+                        products.getStock(),
+                        products.getPrice()
                     }
             );
-        }
+        });
         
         jTable1.setModel(defaultTableModel);
         return defaultTableModel.getRowCount() != 0;

@@ -19,17 +19,17 @@ import javax.swing.JOptionPane;
  */
 public class ProductModel {
 
-    String id;
+    int id;
     String name;
-    String stock;
-    String price;
+    int stock;
+    int price;
     private Connection conn;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -41,19 +41,19 @@ public class ProductModel {
         this.name = name;
     }
 
-    public String getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
     
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -65,10 +65,10 @@ public class ProductModel {
             Connection conn = ConnectDB.getInstance().getConnection();
             if (conn != null) {
                 PreparedStatement pst = conn.prepareStatement(sql);
-                pst.setString(1, id);
+                pst.setInt(1, id);
                 pst.setString(2, name);
-                pst.setString(3, stock);
-                pst.setString(4, price);
+                pst.setInt(3, stock);
+                pst.setInt(4, price);
 
                 // execute the preparedstatement
                 pst.execute();
@@ -84,23 +84,23 @@ public class ProductModel {
         return toReturn;
     }
     
-    public boolean updateProduct () {
+    public boolean updateProduct (ProductModel pm) {
         boolean toReturn = false;
         try {
-            
-            String sql = "UPDATE product "
-                    +"id, "
-                    +"prod_name, "
-                    +"prod_stock"
-                    +"prod_price"
-                    +"WHERE id = ?";
+          
+            String sql = "UPDATE product SET "
+                    +"prod_name = ?, "
+                    +"prod_stock = ?, "
+                    +"prod_price = ? "
+                    +"WHERE id = ? ";
             Connection conn = ConnectDB.getInstance().getConnection();
             if (conn != null) {
                 PreparedStatement pst = conn.prepareStatement(sql);
-                pst.setString(1, id);
-                pst.setString(2, name);
-                pst.setString(3, stock);
-                pst.setString(4, price);
+                
+                pst.setString(1, name);
+                pst.setInt(2, stock);
+                pst.setInt(3, price);
+                pst.setInt(4, id);
 
                 // execute the preparedstatement
                 pst.execute();
@@ -115,33 +115,35 @@ public class ProductModel {
         return toReturn;
     }
     
-    public ArrayList<ProductModel> selectProduct(){
+    public ArrayList<ProductModel> showProduct(){
         ArrayList<ProductModel> productList = new ArrayList<>();
         String query = "SELECT * FROM product";
         
-//        KONEKSI
         conn = ConnectDB.getInstance().getConnection();
+        PreparedStatement pst;
+        ResultSet rs;
         
         if (conn != null) {
-           try{
-               PreparedStatement pst = conn.prepareStatement(query);
-               
-               ResultSet rs;
-               rs = pst.executeQuery();
-               
-               while (rs.next()) {
+            try{
+                pst = conn.prepareStatement(query);
+                rs = pst.executeQuery();
+            
+                while (rs.next()){
                     ProductModel product = new ProductModel();
-                    product.setId(rs.getString("id"));
+                    product.setId(rs.getInt("id"));
                     product.setName(rs.getString("prod_name"));
-                    product.setStock(rs.getString("prod_stock"));
-                    product.setPrice(rs.getString("prod_price"));
+                    product.setStock(rs.getInt("prod_stock"));
+                    product.setPrice(rs.getInt("prod_price"));
+                    productList.add(product);
                 }
+                
                 conn.close();
                 return productList;
-           }catch (SQLException ex) {
+            }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, ex);
             }
-        }
+           
+        }  
         return null;
     } 
 
