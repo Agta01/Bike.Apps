@@ -80,26 +80,25 @@ public class ProductController {
         
     }
  
-    public boolean populateTable(JTable jTable1){
+    public boolean populateTable(JTable warehouseTable){
         ProductModel product = new ProductModel();
         ArrayList<ProductModel> productList = product.showProduct();
-        DefaultTableModel defaultTableModel = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel defaultTableModel = (DefaultTableModel) warehouseTable.getModel();
         
         defaultTableModel.setRowCount(0);
         
-        productList.forEach((products) -> {
+        for (ProductModel products : productList) {
             defaultTableModel.addRow(
-            
-                    new Object[]{
-                        products.getId(),
-                        products.getName(),
-                        products.getStock(),
-                        products.getPrice()
-                    }
+                new Object[]{
+                    products.getId(),
+                    products.getName(),
+                    products.getStock(),
+                    products.getPrice()
+                }
             );
-        });
+        }
         
-        jTable1.setModel(defaultTableModel);
+        warehouseTable.setModel(defaultTableModel);
         return defaultTableModel.getRowCount() != 0;
     }
 }

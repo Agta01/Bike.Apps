@@ -27,9 +27,9 @@ public class Warehouse extends javax.swing.JFrame {
         productController.populateTable(warehouseTable);   
     }
     
-//    public JTable getProductTable(){
-//        return warehouseTable;
-//    }
+    public JTable getProductTable(){
+        return warehouseTable;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

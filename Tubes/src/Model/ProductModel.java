@@ -146,5 +146,30 @@ public class ProductModel {
         }  
         return null;
     } 
+    
+    public boolean deleteProduct(){
+        boolean toReturn=false;
+        
+        try{
+            String query = "DELETE FROM product WHERE id = ? ";
+            
+            conn = ConnectDB.getInstance().getConnection();
+            
+            if (conn != null) {
+                PreparedStatement pst;
+                
+                pst = conn.prepareStatement(query);
+                pst.setInt(1, id);
+                pst.execute();
+                conn.close();
+                toReturn = true;
+                
+            }
+        }catch(SQLException e){
+            System.out.println("Error= "+e.getMessage());
+        }
+        
+        return toReturn;
+    }
 
 }
