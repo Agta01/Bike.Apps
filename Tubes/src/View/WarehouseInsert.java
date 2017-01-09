@@ -148,7 +148,7 @@ public class WarehouseInsert extends javax.swing.JFrame {
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
         ProductController.tambahProduct(this);
-        this.dispose();
+//        this.dispose();
         
     }//GEN-LAST:event_saveBtnActionPerformed
 

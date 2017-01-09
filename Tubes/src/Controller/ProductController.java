@@ -24,24 +24,50 @@ public class ProductController {
 
     private static ProductModel productModel = new ProductModel();
     
-    public static void tambahProduct(WarehouseInsert warehouseInsert) {
+        public static void tambahProduct(WarehouseInsert warehouseInsert) {
         Warehouse warehose = new Warehouse();
-        int stock = Integer.parseInt(warehouseInsert.getInputJumlah().getText());
-        int price = Integer.parseInt(warehouseInsert.getInputHarga().getText());
+        String name = warehouseInsert.getInputNama().getText();
+        String stock = warehouseInsert.getInputJumlah().getText();
+        String harga = warehouseInsert.getInputHarga().getText();
+        if (!name.isEmpty()) {
+            if (!stock.isEmpty()) {
+                if (stock.matches("^\\d+$")) {
+                    if (!harga.isEmpty()) {
+                        if (harga.matches("^\\d+$")) {
 
-        productModel.setName(warehouseInsert.getInputNama().getText());
-        productModel.setStock(stock);
-        productModel.setPrice(price);
+                            int stockParse = Integer.parseInt(warehouseInsert.getInputJumlah().getText());
+                            int priceParse = Integer.parseInt(warehouseInsert.getInputHarga().getText());
 
-        if (productModel.insert()) {
-            JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan !");
-            warehouseInsert.dispose();
-            
-            Warehouse wi = new Warehouse();
-            wi.setVisible(true); 
+                            productModel.setName(name);
+                            productModel.setStock(stockParse);
+                            productModel.setPrice(priceParse);
+
+                            if (productModel.insert()) {
+                                JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan !");
+                                warehouseInsert.dispose();
+
+                                Warehouse wi = new Warehouse();
+                                wi.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Gagal menyimpan data !");
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Harga Harus Angka");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Harga Tidak Boleh Kosong");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Jumlah Harus Angka");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Jumlah Tidak Boleh Kosong");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Gagal menyimpan data !");
+            JOptionPane.showMessageDialog(null, "Nama Tidak Boleh Kosong");
         }
+
     }
 
     public void updateShow(JTable table) {
