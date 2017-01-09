@@ -108,12 +108,15 @@ public class ProductController {
         ProductModel product = new ProductModel();
         ArrayList<ProductModel> productList = product.showProduct();
         DefaultTableModel defaultTableModel = (DefaultTableModel) warehouseTable.getModel();
-
+        
+        int i = 1;
+        
         defaultTableModel.setRowCount(0);
 
         for (ProductModel products : productList) {
             defaultTableModel.addRow(
                     new Object[]{
+                        i++,
                         products.getId(),
                         products.getName(),
                         products.getStock(),

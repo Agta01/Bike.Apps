@@ -55,11 +55,11 @@ public class Warehouse extends javax.swing.JFrame {
 
         warehouseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Teh Pucuk", "3", "50000"},
-                {"2", "Teh Mecin", "4", null}
+                {null, "1", "Teh Pucuk", "3", "50000"},
+                {null, "2", "Teh Mecin", "4", null}
             },
             new String [] {
-                "No", "Nama Barang", "Jumlah Barang", "Harga Barang"
+                "No", "Kode Barang", "Nama Barang", "Jumlah Barang", "Harga Barang"
             }
         ));
         jScrollPane1.setViewportView(warehouseTable);
