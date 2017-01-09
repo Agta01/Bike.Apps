@@ -49,6 +49,7 @@ public class Warehouse extends javax.swing.JFrame {
         JudulText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         warehouseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,6 +134,7 @@ public class Warehouse extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void changeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeBtnActionPerformed
@@ -158,6 +160,14 @@ public class Warehouse extends javax.swing.JFrame {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
+        
+         WarehouseUpdate warehouseUpdate= new WarehouseUpdate();
+        
+        if (warehouseTable.getSelectedRowCount()== 0) {
+            JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel");     
+        } else {
+            productController.hapusProduct(warehouseTable);
+        }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     /**

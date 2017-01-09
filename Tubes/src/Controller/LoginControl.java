@@ -19,6 +19,7 @@ import Model.UserModel;
  * @author sulistiana
  */
 public class LoginControl {
+    
     private final Logins l = new Logins();
     private final UserModel uM = new UserModel();
     
@@ -33,34 +34,23 @@ public class LoginControl {
 //                        l.dispose();
                         JOptionPane.showMessageDialog(l, "Success ini manager!!");
                         return true;
-                    
+                    case "casier":
+//                        mM.setVisible(true);
+//                        l.dispose();
+                        JOptionPane.showMessageDialog(l, "Success ini Casier!!");
+                        return true;    
                     default:
                         JOptionPane.showMessageDialog(l, "Username atau Password salah");
                         return false;
                 }
             } else {
-                JOptionPane.showMessageDialog(l, "Password harus diisi");
+                JOptionPane.showMessageDialog(l, "Password harus diisi!");
                 return false;
             }
         } else {
-            JOptionPane.showMessageDialog(l, "Username harus diisi");
+            JOptionPane.showMessageDialog(l, "Username harus diisi!");
             return false;
         }
 
-    }
-
-    public void setFrameIcon(Logins login) {
-        try {
-            final List<Image> icons = new ArrayList<Image>();
-            File file16 = new File("lib/BikeApps16.png");
-            File file32 = new File("lib/BikeApps32.png");
-            
-            
-            icons.add(ImageIO.read(file16));
-            icons.add(ImageIO.read(file32));
-            login.setIconImages(icons);
-        } catch (Exception e) {
-            System.out.println("e : " + e);
-        }
     }
 }
