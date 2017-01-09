@@ -147,9 +147,7 @@ public class Warehouse extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel");     
         } else {
             productController.updateShow(warehouseTable);
-            Warehouse wi = new Warehouse();
-            wi.setVisible(true); 
-//            productController.populateTable(warehouseTable);  
+              
         }
         
         
