@@ -9,6 +9,8 @@ import Model.ProductModel;
 import View.Warehouse;
 import View.WarehouseInsert;
 import View.WarehouseUpdate;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import java.util.ArrayList;
@@ -21,8 +23,9 @@ import javax.swing.table.DefaultTableModel;
 public class ProductController {
 
     private static ProductModel productModel = new ProductModel();
-
-    public static void tambahAnggota(WarehouseInsert warehouseInsert) {
+    
+    public static void tambahProduct(WarehouseInsert warehouseInsert) {
+        Warehouse warehose = new Warehouse();
         int stock = Integer.parseInt(warehouseInsert.getInputJumlah().getText());
         int price = Integer.parseInt(warehouseInsert.getInputHarga().getText());
 
@@ -33,6 +36,9 @@ public class ProductController {
         if (productModel.insert()) {
             JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan !");
             warehouseInsert.dispose();
+            
+            Warehouse wi = new Warehouse();
+            wi.setVisible(true); 
         } else {
             JOptionPane.showMessageDialog(null, "Gagal menyimpan data !");
         }
@@ -89,7 +95,7 @@ public class ProductController {
 
             if (productModel.deleteProduct()) {
                 JOptionPane.showMessageDialog(null, "Product berhasil dihapus !");
-//                anggotaDialog.dispose();
+//                anggotaDialog.dispose();   
             } else {
                 JOptionPane.showMessageDialog(null, "Gagal Menghapus Product !");
             }

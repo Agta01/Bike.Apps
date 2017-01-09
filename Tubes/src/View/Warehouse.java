@@ -28,7 +28,9 @@ public class Warehouse extends javax.swing.JFrame {
     }
     
     public JTable getProductTable(){
+       
         return warehouseTable;
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -145,7 +147,9 @@ public class Warehouse extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel");     
         } else {
             productController.updateShow(warehouseTable);
-            
+            Warehouse wi = new Warehouse();
+            wi.setVisible(true); 
+//            productController.populateTable(warehouseTable);  
         }
         
         
@@ -154,8 +158,9 @@ public class Warehouse extends javax.swing.JFrame {
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
         WarehouseInsert wi = new WarehouseInsert();
-        
-        wi.setVisible(true);        
+        wi.setVisible(true);  
+        this.dispose();
+ 
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -167,6 +172,7 @@ public class Warehouse extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel");     
         } else {
             productController.hapusProduct(warehouseTable);
+            productController.populateTable(warehouseTable);  
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
