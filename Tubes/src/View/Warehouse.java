@@ -24,7 +24,7 @@ public class Warehouse extends javax.swing.JFrame {
      */
     public Warehouse() {
         initComponents();
-        productController.populateTable(warehouseTable);   
+        productController.populateTable(warehouseTable, "");   
     }
     
     public JTable getProductTable(){
@@ -52,6 +52,12 @@ public class Warehouse extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+
+        search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchKeyReleased(evt);
+            }
+        });
 
         warehouseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,9 +176,14 @@ public class Warehouse extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel");     
         } else {
             productController.hapusProduct(warehouseTable);
-            productController.populateTable(warehouseTable);  
+            productController.populateTable(warehouseTable, "");  
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
+        // TODO add your handling code here:
+        productController.populateTable(warehouseTable, search.getText());
+    }//GEN-LAST:event_searchKeyReleased
 
     /**
      * @param args the command line arguments

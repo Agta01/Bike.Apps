@@ -103,11 +103,21 @@ public class ProductController {
         }
 
     }
+    
+    public void serchWarehouse() {
+        try {
+            
+            ProductModel productModel = new ProductModel();
+            
+        } catch (Exception e) {
+            System.out.println();
+        }
+    }
 
-    public boolean populateTable(JTable warehouseTable) {
+    public boolean populateTable(JTable jTable1, String search) {
         ProductModel product = new ProductModel();
-        ArrayList<ProductModel> productList = product.showProduct();
-        DefaultTableModel defaultTableModel = (DefaultTableModel) warehouseTable.getModel();
+        ArrayList<ProductModel> productList = product.showProduct(search);
+        DefaultTableModel defaultTableModel = (DefaultTableModel) jTable1.getModel();
         
         int i = 1;
         
@@ -125,7 +135,7 @@ public class ProductController {
             );
         }
 
-        warehouseTable.setModel(defaultTableModel);
+        jTable1.setModel(defaultTableModel);
         return defaultTableModel.getRowCount() != 0;
     }
 }

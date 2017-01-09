@@ -115,9 +115,12 @@ public class ProductModel {
         return toReturn;
     }
     
-    public ArrayList<ProductModel> showProduct(){
+    public ArrayList<ProductModel> showProduct(String search){
         ArrayList<ProductModel> productList = new ArrayList<>();
         String query = "SELECT * FROM product";
+        if (!search.isEmpty()) {
+            query = query + " WHERE product.prod_name LIKE '%"+search+"%'";
+        }
         
         conn = ConnectDB.getInstance().getConnection();
         PreparedStatement pst;
