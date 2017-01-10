@@ -23,8 +23,8 @@ import javax.swing.table.DefaultTableModel;
 public class ProductController {
 
     private static ProductModel productModel = new ProductModel();
-    
-        public static void tambahProduct(WarehouseInsert warehouseInsert) {
+
+    public static void tambahProduct(WarehouseInsert warehouseInsert) {
         Warehouse warehose = new Warehouse();
         String name = warehouseInsert.getInputNama().getText();
         String stock = warehouseInsert.getInputJumlah().getText();
@@ -79,10 +79,10 @@ public class ProductController {
         WarehouseUpdate wu = new WarehouseUpdate();
 
         int row = table.getSelectedRow();
-        wu.getIdLabel().setText(table.getValueAt(row, 0).toString());
-        wu.getInputNama().setText(table.getValueAt(row, 1).toString());
-        wu.getInputJumlah().setText(table.getValueAt(row, 2).toString());
-        wu.getInputHarga().setText(table.getValueAt(row, 3).toString());
+        wu.getIdLabel().setText(table.getValueAt(row, 1).toString());
+        wu.getInputNama().setText(table.getValueAt(row, 2).toString());
+        wu.getInputJumlah().setText(table.getValueAt(row, 3).toString());
+        wu.getInputHarga().setText(table.getValueAt(row, 4).toString());
 
         wu.setVisible(true);
 //        if (.updateProduct()) {
@@ -94,18 +94,47 @@ public class ProductController {
     }
 
     public void updateChange(WarehouseUpdate warehouseUpdate) {
-        int id = Integer.parseInt(warehouseUpdate.getIdLabel().getText());
-        int stock = Integer.parseInt(warehouseUpdate.getInputJumlah().getText());
-        int price = Integer.parseInt(warehouseUpdate.getInputHarga().getText());
         productModel = new ProductModel();
 
-        productModel.setId(id);
-        productModel.setName(warehouseUpdate.getInputNama().getText());
-        productModel.setStock(stock);
-        productModel.setPrice(price);
+        String name = warehouseUpdate.getInputNama().getText();
+        String stock = warehouseUpdate.getJumlah().getText();
+        String harga = warehouseUpdate.getInputHarga().getText();
 
-        System.out.println(id);
-        productModel.updateProduct(productModel);
+//        VALIDASI UPDATE
+        if (!name.isEmpty()) {
+            if (!stock.isEmpty()) {
+                if (stock.matches("^\\d+$")) {
+                    if (!harga.isEmpty()) {
+                        if (harga.matches("^\\d+$")) {
+
+                            int id = Integer.parseInt(warehouseUpdate.getIdLabel().getText());
+                            int stockParse = Integer.parseInt(warehouseUpdate.getInputJumlah().getText());
+                            int priceParse = Integer.parseInt(warehouseUpdate.getInputHarga().getText());
+
+                            productModel.setId(id);
+                            productModel.setName(name);
+                            productModel.setStock(stockParse);
+                            productModel.setPrice(priceParse);
+
+                            System.out.println(id);
+                            productModel.updateProduct(productModel);
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Harga Harus Angka");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Harga Tidak Boleh Kosong");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Jumlah Harus Angka");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Jumlah Tidak Boleh Kosong");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Nama Tidak Boleh Kosong");
+        }
+//        END VALIDASI UPDATE
 
     }
 
@@ -125,16 +154,16 @@ public class ProductController {
             } else {
                 JOptionPane.showMessageDialog(null, "Gagal Menghapus Product !");
             }
-            
+
         }
 
     }
-    
+
     public void serchWarehouse() {
         try {
-            
+
             ProductModel productModel = new ProductModel();
-            
+
         } catch (Exception e) {
             System.out.println();
         }
@@ -144,9 +173,9 @@ public class ProductController {
         ProductModel product = new ProductModel();
         ArrayList<ProductModel> productList = product.showProduct(search);
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTable1.getModel();
-        
+
         int i = 1;
-        
+
         defaultTableModel.setRowCount(0);
 
         for (ProductModel products : productList) {
