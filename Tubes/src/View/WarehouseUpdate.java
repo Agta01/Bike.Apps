@@ -232,13 +232,15 @@ public class WarehouseUpdate extends javax.swing.JFrame {
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        Warehouse w = new Warehouse();
+        w.setVisible(true);
     }//GEN-LAST:event_closeBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
 //        ProductController.update(this);
         productController.updateChange(this);        
-//        this.dispose();
+        this.dispose();
         Warehouse w = new Warehouse();
         w.setVisible(true);
     }//GEN-LAST:event_saveBtnActionPerformed

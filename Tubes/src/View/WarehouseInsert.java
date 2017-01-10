@@ -23,8 +23,6 @@ public class WarehouseInsert extends javax.swing.JFrame {
     public WarehouseInsert() {
         initComponents();
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -141,15 +139,16 @@ public class WarehouseInsert extends javax.swing.JFrame {
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
         // TODO add your handling code here:
         WarehouseInsert wi = new WarehouseInsert();
-//        wi.dispatchEvent(new WindowEvent(wi, WindowEvent.WINDOW_CLOSING));
-       this.dispose();
+        this.dispose();
+        Warehouse w = new Warehouse();
+        w.setVisible(true);
     }//GEN-LAST:event_closeBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
         ProductController.tambahProduct(this);
 //        this.dispose();
-        
+
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void inputNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNamaActionPerformed

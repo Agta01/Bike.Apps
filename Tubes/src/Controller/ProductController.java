@@ -32,40 +32,52 @@ public class ProductController {
         if (!name.isEmpty()) {
             if (!stock.isEmpty()) {
                 if (stock.matches("^\\d+$")) {
-                    if (!harga.isEmpty()) {
-                        if (harga.matches("^\\d+$")) {
+                    if (Integer.parseInt(stock) != 0) {
+                        if (!harga.isEmpty()) {
+                            if (harga.matches("^\\d+$")) {
+                                if (Integer.parseInt(harga) != 0) {
 
-                            int stockParse = Integer.parseInt(warehouseInsert.getInputJumlah().getText());
-                            int priceParse = Integer.parseInt(warehouseInsert.getInputHarga().getText());
+                                    int stockParse = Integer.parseInt(warehouseInsert.getInputJumlah().getText());
+                                    int priceParse = Integer.parseInt(warehouseInsert.getInputHarga().getText());
 
-                            productModel.setName(name);
-                            productModel.setStock(stockParse);
-                            productModel.setPrice(priceParse);
+                                    productModel.setName(name);
+                                    productModel.setStock(stockParse);
+                                    productModel.setPrice(priceParse);
 
-                            if (productModel.insert()) {
-                                JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan !");
-                                warehouseInsert.dispose();
+                                    if (productModel.insert()) {
+                                        JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
 
-                                Warehouse wi = new Warehouse();
-                                wi.setVisible(true);
+                                        warehouseInsert.dispose();
+
+                                        Warehouse wi = new Warehouse();
+                                        wi.setVisible(true);
+
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Gagal menyimpan data !");
+
+                                    }
+
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Harga tidak boleh 0");
+                                }
+
                             } else {
-                                JOptionPane.showMessageDialog(null, "Gagal menyimpan data !");
+                                JOptionPane.showMessageDialog(null, "harga harus angka");
                             }
-
                         } else {
-                            JOptionPane.showMessageDialog(null, "Harga Harus Angka");
+                            JOptionPane.showMessageDialog(null, "harga tidak boleh kosong");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Harga Tidak Boleh Kosong");
+                        JOptionPane.showMessageDialog(null, "Stok tidak boleh 0");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Jumlah Harus Angka");
+                    JOptionPane.showMessageDialog(null, "Stock harus angka");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Jumlah Tidak Boleh Kosong");
+                JOptionPane.showMessageDialog(null, "Stok tidak boleh kosong");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Nama Tidak Boleh Kosong");
+            JOptionPane.showMessageDialog(null, "Nama tidak boleh kosong");
         }
 
     }
@@ -97,7 +109,7 @@ public class ProductController {
         productModel = new ProductModel();
 
         String name = warehouseUpdate.getInputNama().getText();
-        String stock = warehouseUpdate.getJumlah().getText();
+        String stock = warehouseUpdate.getInputJumlah().getText();
         String harga = warehouseUpdate.getInputHarga().getText();
 
 //        VALIDASI UPDATE
