@@ -146,7 +146,7 @@ public class ProductController {
         if (option == JOptionPane.OK_OPTION) {
             int row = table.getSelectedRow();
             DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-            productModel.setId(Integer.parseInt(table.getValueAt(row, 0).toString()));
+            productModel.setId(Integer.parseInt(table.getValueAt(row, 1).toString()));
 
             if (productModel.deleteProduct()) {
                 JOptionPane.showMessageDialog(null, "Product berhasil dihapus !");
