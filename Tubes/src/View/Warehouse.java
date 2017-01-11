@@ -54,15 +54,20 @@ public class Warehouse extends javax.swing.JFrame {
         changeBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         JudulText = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(470, 378));
         setResizable(false);
+        getContentPane().setLayout(null);
 
         search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchKeyReleased(evt);
             }
         });
+        getContentPane().add(search);
+        search.setBounds(104, 93, 206, 28);
 
         warehouseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,12 +80,17 @@ public class Warehouse extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(warehouseTable);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(21, 140, 438, 150);
+
         addBtn.setText("Tambah");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(addBtn);
+        addBtn.setBounds(20, 300, 70, 26);
 
         deleteBtn.setText("Hapus");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +98,8 @@ public class Warehouse extends javax.swing.JFrame {
                 deleteBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(deleteBtn);
+        deleteBtn.setBounds(170, 300, 60, 26);
 
         changeBtn.setText("Ubah");
         changeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -95,56 +107,22 @@ public class Warehouse extends javax.swing.JFrame {
                 changeBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(changeBtn);
+        changeBtn.setBounds(100, 300, 60, 26);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Pencarian");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(21, 99, 71, 15);
 
         JudulText.setFont(new java.awt.Font("Tekton Pro", 1, 36)); // NOI18N
         JudulText.setText("Dashboard Gudang");
+        getContentPane().add(JudulText);
+        JudulText.setBounds(97, 22, 289, 43);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(JudulText, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(addBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(changeBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteBtn)))
-                        .addGap(18, 18, 18))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(JudulText)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBtn)
-                    .addComponent(deleteBtn)
-                    .addComponent(changeBtn))
-                .addContainerGap(64, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/bg1.jpg"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 480, 380);
 
         pack();
         setLocationRelativeTo(null);
@@ -245,6 +223,7 @@ public class Warehouse extends javax.swing.JFrame {
     private javax.swing.JButton changeBtn;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField search;
     private javax.swing.JTable warehouseTable;
