@@ -7,9 +7,14 @@ package View;
 
 import Controller.ProductController;
 import View.WarehouseInsert;
+import com.alee.laf.WebLookAndFeel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -275,6 +280,21 @@ public class WarehouseUpdate extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
+                WebLookAndFeel.install(true);
+                
+                try {
+                    UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CashierView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(CashierView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(CashierView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(CashierView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 new WarehouseUpdate().setVisible(true);
             }
         });

@@ -7,8 +7,13 @@ package View;
 
 import Controller.ProductController;
 import View.Warehouse;
+import com.alee.laf.WebLookAndFeel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -216,6 +221,19 @@ public class Warehouse extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                WebLookAndFeel.install(true);
+                
+                try {
+                    UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CashierView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(CashierView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(CashierView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(CashierView.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new Warehouse().setVisible(true);
             }
         });
