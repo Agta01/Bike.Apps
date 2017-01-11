@@ -119,7 +119,10 @@ public class ProductModel {
         ArrayList<ProductModel> productList = new ArrayList<>();
         String query = "SELECT * FROM product";
         if (!search.isEmpty()) {
-            query = query + " WHERE product.prod_name LIKE '%"+search+"%'";
+            query = query + " WHERE product.id LIKE '%" + search +
+                    "%' OR product.prod_name LIKE '%" + search +
+                    "%' OR product.prod_stock LIKE '%" + search +
+                    "%' OR product.prod_price LIKE '%" + search + "%'";
         }
         
         conn = ConnectDB.getInstance().getConnection();
