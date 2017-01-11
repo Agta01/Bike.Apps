@@ -58,7 +58,7 @@ public class CashierView extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        deletedBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         searchText = new javax.swing.JTextField();
@@ -98,9 +98,14 @@ public class CashierView extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(480, 460));
         getContentPane().setLayout(null);
 
-        jButton2.setText("Hapus");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(100, 400, 86, 26);
+        deletedBtn.setText("Hapus");
+        deletedBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletedBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(deletedBtn);
+        deletedBtn.setBounds(100, 400, 86, 26);
 
         jButton1.setBackground(new java.awt.Color(55, 238, 231));
         jButton1.setText("Bayar");
@@ -211,7 +216,7 @@ public class CashierView extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false
+                false, false, false, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -317,6 +322,15 @@ public class CashierView extends javax.swing.JFrame {
         productController.deleteDataAll(tableBeli);
     }//GEN-LAST:event_cancelBtnActionPerformed
 
+    private void deletedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletedBtnActionPerformed
+        // TODO add your handling code here:
+        if (tableBeli.getSelectedRowCount()== 0) {
+            JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel!");     
+        } else {
+             productController.selectedDataCashier(tableBeli);
+        }
+    }//GEN-LAST:event_deletedBtnActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -377,8 +391,8 @@ public class CashierView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton deletedBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

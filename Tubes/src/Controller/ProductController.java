@@ -46,29 +46,11 @@ public class ProductController {
         listDataCashier.remove(index);
     }
 
-    public boolean deleteDataAll(JTable table2) {
+    public void deleteDataAll(JTable table2) {
         
         listDataCashier.removeAll(listDataCashier);
+        getTable2(table2);
         
-        DefaultTableModel dtm2 = (DefaultTableModel) table2.getModel();
-        
-        dtm2.setRowCount(0);
-
-        for (DataCashier dataCashier : getAll()) {
-            dtm2.addRow(
-                    new Object[]{
-                        "",
-                        dataCashier.getId(),
-                        dataCashier.getNamaBarang(),
-                        dataCashier.getHarga(),
-                        dataCashier.getJumlah(),
-                        dataCashier.getTotal()
-                    }
-            );
-        }
-
-        table2.setModel(dtm2);
-        return dtm2.getRowCount() != 0;   
     }
 
     public static void tambahProduct(WarehouseInsert warehouseInsert) {
@@ -130,10 +112,6 @@ public class ProductController {
     }
 
     public void updateShow(JTable table) {
-//        productModel.setName(table.getInputNama().getText());
-//        productModel.setStock(warehouseInsert.getInputJumlah().getText());
-//        productModel.setPrice(warehouseInsert.getInputHarga().getText());
-
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         WarehouseUpdate wu = new WarehouseUpdate();
 
@@ -144,14 +122,9 @@ public class ProductController {
         wu.getInputHarga().setText(table.getValueAt(row, 4).toString());
 
         wu.setVisible(true);
-//        if (.updateProduct()) {
-//            JOptionPane.showMessageDialog(null, "Data berhasil di ubah !");
-//            warehouseInsert.dispose();
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Gagal mengubah data !");
-//        }
     }
 
+//    data cashier
     public boolean selectedProduct(JTable table, JTable table2, JTextField qty) {
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         DefaultTableModel dtm2 = (DefaultTableModel) table2.getModel();
@@ -171,6 +144,7 @@ public class ProductController {
         double total = harga * jumlah;
 
         insertData(kodeBarang, stok, jumlah, harga, namaBarang, total);
+
 
         int i = 1;
 
@@ -192,6 +166,34 @@ public class ProductController {
         table2.setModel(dtm2);
         return dtm2.getRowCount() != 0;
 
+    }
+    
+    public void selectedDataCashier(JTable table2) {
+        int row = table2.getSelectedRow();
+        int index = Integer.parseInt(table2.getValueAt(row, 0).toString());
+        deleteData(index-1);  
+        getTable2(table2);
+    }
+    
+    public boolean getTable2(JTable table2){
+        DefaultTableModel dtm2 = (DefaultTableModel) table2.getModel();
+        dtm2.setRowCount(0);
+        
+        int i=1;
+        for (DataCashier dataCashier : getAll()) {
+            dtm2.addRow(
+                    new Object[]{
+                        i++,
+                        dataCashier.getId(),
+                        dataCashier.getNamaBarang(),
+                        dataCashier.getHarga(),
+                        dataCashier.getJumlah(),
+                        dataCashier.getTotal()
+                    }
+            );
+        }
+        table2.setModel(dtm2);
+        return dtm2.getRowCount() != 0;   
     }
 
     public void updateChange(WarehouseUpdate warehouseUpdate) {
