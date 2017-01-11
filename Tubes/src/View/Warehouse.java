@@ -113,16 +113,14 @@ public class Warehouse extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Pencarian");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(21, 99, 71, 15);
+        jLabel1.setBounds(21, 99, 59, 15);
 
         JudulText.setFont(new java.awt.Font("Tekton Pro", 1, 36)); // NOI18N
         JudulText.setText("Dashboard Gudang");
         getContentPane().add(JudulText);
-        JudulText.setBounds(97, 22, 289, 43);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/bg1.jpg"))); // NOI18N
+        JudulText.setBounds(97, 22, 289, 37);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 480, 380);
+        jLabel2.setBounds(0, 0, 570, 380);
 
         pack();
         setLocationRelativeTo(null);
