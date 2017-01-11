@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.ProductModel;
+import View.CashierView;
 import View.Warehouse;
 import View.WarehouseInsert;
 import View.WarehouseUpdate;
@@ -103,6 +104,22 @@ public class ProductController {
 //        } else {
 //            JOptionPane.showMessageDialog(null, "Gagal mengubah data !");
 //        }
+    }
+    
+    public String[] selectedProduct(JTable table){
+        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+         CashierView cashierView = new CashierView();
+         
+         int row = table.getSelectedRow();
+         String[] product= new String[4];
+         
+         product[0] = table.getValueAt(row, 1).toString();
+         product[1] = table.getValueAt(row, 2).toString();
+         product[2] = table.getValueAt(row, 3).toString();
+         product[3] = table.getValueAt(row, 4).toString();
+//         product[3] = table.getValueAt(row, 3).toString();
+         
+         return product;
     }
 
     public void updateChange(WarehouseUpdate warehouseUpdate) {

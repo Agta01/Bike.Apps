@@ -5,9 +5,16 @@
  */
 package View;
 
+import Controller.ProductController;
 import com.alee.laf.WebLookAndFeel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
@@ -21,8 +28,23 @@ public class CashierView extends javax.swing.JFrame {
     /**
      * Creates new form CashierView
      */
+    
+//    JButton tambahkanBtn = new JButton();
+    ProductController productController = new ProductController();
+    
+    
     public CashierView() {
+        
         initComponents();
+        
+        
+        productController.populateTable(productTable, "");
+    }
+    
+    public JTable getProductTable(){
+       
+        return productTable;
+        
     }
 
     /**
@@ -41,7 +63,7 @@ public class CashierView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         searchText = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        productTable = new javax.swing.JTable();
         tambahkanBtn = new javax.swing.JButton();
         qtyText = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -51,6 +73,7 @@ public class CashierView extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -68,14 +91,14 @@ public class CashierView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
-        setMinimumSize(new java.awt.Dimension(480, 420));
+        setMinimumSize(new java.awt.Dimension(480, 430));
         setResizable(false);
         setSize(new java.awt.Dimension(480, 420));
         getContentPane().setLayout(null);
 
         jButton2.setText("Hapus");
         getContentPane().add(jButton2);
-        jButton2.setBounds(266, 368, 86, 26);
+        jButton2.setBounds(100, 370, 86, 26);
 
         jButton1.setBackground(new java.awt.Color(55, 238, 231));
         jButton1.setText("Bayar");
@@ -106,25 +129,53 @@ public class CashierView extends javax.swing.JFrame {
             }
         });
         getContentPane().add(searchText);
-        searchText.setBounds(109, 44, 260, 39);
+        searchText.setBounds(190, 40, 270, 39);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        productTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "No", "Kode Barang", "Nama Barang", "Stok", "Haraga"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(productTable);
+        if (productTable.getColumnModel().getColumnCount() > 0) {
+            productTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(13, 89, 452, 102);
 
         tambahkanBtn.setText("Tambahkan");
+        tambahkanBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                tambahkanBtnMouseMoved(evt);
+            }
+        });
+        tambahkanBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahkanBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(tambahkanBtn);
         tambahkanBtn.setBounds(357, 197, 108, 32);
 
@@ -167,27 +218,32 @@ public class CashierView extends javax.swing.JFrame {
 
         jButton3.setText("Batalkan");
         getContentPane().add(jButton3);
-        jButton3.setBounds(12, 368, 83, 26);
+        jButton3.setBounds(10, 370, 83, 26);
 
         jButton4.setText("Ubah");
         getContentPane().add(jButton4);
-        jButton4.setBounds(179, 368, 81, 26);
+        jButton4.setBounds(190, 370, 81, 26);
 
         jButton5.setBackground(new java.awt.Color(243, 22, 19));
         jButton5.setText("Logout");
         getContentPane().add(jButton5);
-        jButton5.setBounds(397, 10, 60, 26);
+        jButton5.setBounds(400, 10, 60, 26);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 0, 0);
 
+        jButton6.setText("Data Transaksi");
+        getContentPane().add(jButton6);
+        jButton6.setBounds(10, 10, 120, 26);
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/bg1.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 480, 420);
+        jLabel3.setBounds(0, 0, 480, 430);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+ 
     private void qtyTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qtyTextKeyPressed
         // TODO add your handling code here:
         //        qtyText.setText("");
@@ -204,7 +260,7 @@ public class CashierView extends javax.swing.JFrame {
 
     private void searchTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextKeyPressed
         // TODO add your handling code here:
-
+            productController.populateTable(productTable, searchText.getText());
     }//GEN-LAST:event_searchTextKeyPressed
 
     private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
@@ -216,10 +272,35 @@ public class CashierView extends javax.swing.JFrame {
         searchText.setText("");
     }//GEN-LAST:event_searchTextMouseClicked
 
+    private void tambahkanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahkanBtnActionPerformed
+        // TODO add your handling code here:
+         if (productTable.getSelectedRowCount()== 0) {
+            JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel");     
+        } else {
+             System.out.println(Arrays.toString(productController.selectedProduct(productTable))); 
+        }
+        
+    }//GEN-LAST:event_tambahkanBtnActionPerformed
+
+    private void tambahkanBtnMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tambahkanBtnMouseMoved
+        // TODO add your handling code here:
+        
+//        tambahkanBtn.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent ae) {
+//               tambahkanBtn.setEnabled(false);
+////               tambahkanBtn.setEnabled(true);
+//            }
+//          }
+//        );
+    }//GEN-LAST:event_tambahkanBtnMouseMoved
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -247,6 +328,7 @@ public class CashierView extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+            
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {         
@@ -276,6 +358,7 @@ public class CashierView extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -283,9 +366,9 @@ public class CashierView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable productTable;
     private javax.swing.JTextField qtyText;
     private javax.swing.JTextField searchText;
     private javax.swing.JButton tambahkanBtn;
