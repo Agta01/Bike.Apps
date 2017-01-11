@@ -5,16 +5,16 @@
  */
 package Controller;
 
+import Model.DataCashier;
 import Model.ProductModel;
 import View.CashierView;
 import View.Warehouse;
 import View.WarehouseInsert;
 import View.WarehouseUpdate;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import java.util.ArrayList;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,6 +24,52 @@ import javax.swing.table.DefaultTableModel;
 public class ProductController {
 
     private static ProductModel productModel = new ProductModel();
+
+    ArrayList<DataCashier> listDataCashier;
+
+    public ProductController() {
+        listDataCashier = new ArrayList();
+    }
+
+    public void insertData(int kodeBarang, int stok, int jumlah,
+            double harga, String namaBarang, double total) {
+        DataCashier dataCashier = new DataCashier(kodeBarang, stok, jumlah, harga, namaBarang, total);
+
+        listDataCashier.add(dataCashier);
+    }
+
+    public ArrayList<DataCashier> getAll() {
+        return listDataCashier;
+    }
+
+    public void deleteData(int index) { //method untuk menghapus data di ArrayList berdasarkan index Arraynya
+        listDataCashier.remove(index);
+    }
+
+    public boolean deleteDataAll(JTable table2) {
+        
+        listDataCashier.removeAll(listDataCashier);
+        
+        DefaultTableModel dtm2 = (DefaultTableModel) table2.getModel();
+        
+        dtm2.setRowCount(0);
+
+        for (DataCashier dataCashier : getAll()) {
+            dtm2.addRow(
+                    new Object[]{
+                        "",
+                        dataCashier.getId(),
+                        dataCashier.getNamaBarang(),
+                        dataCashier.getHarga(),
+                        dataCashier.getJumlah(),
+                        dataCashier.getTotal()
+                    }
+            );
+        }
+
+        table2.setModel(dtm2);
+        return dtm2.getRowCount() != 0;   
+    }
 
     public static void tambahProduct(WarehouseInsert warehouseInsert) {
         Warehouse warehose = new Warehouse();
@@ -105,21 +151,47 @@ public class ProductController {
 //            JOptionPane.showMessageDialog(null, "Gagal mengubah data !");
 //        }
     }
-    
-    public String[] selectedProduct(JTable table){
+
+    public boolean selectedProduct(JTable table, JTable table2, JTextField qty) {
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-         CashierView cashierView = new CashierView();
-         
-         int row = table.getSelectedRow();
-         String[] product= new String[4];
-         
-         product[0] = table.getValueAt(row, 1).toString();
-         product[1] = table.getValueAt(row, 2).toString();
-         product[2] = table.getValueAt(row, 3).toString();
-         product[3] = table.getValueAt(row, 4).toString();
-//         product[3] = table.getValueAt(row, 3).toString();
-         
-         return product;
+        DefaultTableModel dtm2 = (DefaultTableModel) table2.getModel();
+
+        CashierView cashierView = new CashierView();
+
+        int row = table.getSelectedRow();
+        
+        String[] product = new String[5];
+
+        int kodeBarang = Integer.parseInt(table.getValueAt(row, 1).toString());
+        String namaBarang = table.getValueAt(row, 2).toString();
+        int stok = Integer.parseInt(table.getValueAt(row, 3).toString());
+        double harga = Double.parseDouble(table.getValueAt(row, 4).toString());
+        int jumlah = Integer.parseInt(qty.getText());
+
+        double total = harga * jumlah;
+
+        insertData(kodeBarang, stok, jumlah, harga, namaBarang, total);
+
+        int i = 1;
+
+        dtm2.setRowCount(0);
+
+        for (DataCashier dataCashier : getAll()) {
+            dtm2.addRow(
+                    new Object[]{
+                        i++,
+                        dataCashier.getId(),
+                        dataCashier.getNamaBarang(),
+                        dataCashier.getHarga(),
+                        dataCashier.getJumlah(),
+                        dataCashier.getTotal()
+                    }
+            );
+        }
+
+        table2.setModel(dtm2);
+        return dtm2.getRowCount() != 0;
+
     }
 
     public void updateChange(WarehouseUpdate warehouseUpdate) {
@@ -222,4 +294,5 @@ public class ProductController {
         jTable1.setModel(defaultTableModel);
         return defaultTableModel.getRowCount() != 0;
     }
+
 }
