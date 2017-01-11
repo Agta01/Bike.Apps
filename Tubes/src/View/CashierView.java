@@ -170,7 +170,7 @@ public class CashierView extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(13, 89, 452, 102);
+        jScrollPane1.setBounds(13, 89, 453, 102);
 
         tambahkanBtn.setText("Tambahkan");
         tambahkanBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -226,7 +226,7 @@ public class CashierView extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tableBeli);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 280, 452, 107);
+        jScrollPane3.setBounds(10, 280, 453, 107);
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(0, 239, 477, 10);
 
@@ -258,15 +258,13 @@ public class CashierView extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setText("Daftar barang yang dibeli");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 250, 180, 17);
+        jLabel4.setBounds(10, 250, 180, 19);
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(254, 254, 254));
         jLabel5.setText("Jumlah :");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(240, 200, 80, 20);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/bg1.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 480, 460);
 

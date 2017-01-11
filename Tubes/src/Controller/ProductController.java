@@ -218,9 +218,20 @@ public class ProductController {
                             productModel.setName(name);
                             productModel.setStock(stockParse);
                             productModel.setPrice(priceParse);
-
-                            System.out.println(id);
                             productModel.updateProduct(productModel);
+                            
+                            if (productModel.updateProduct(productModel)) {
+                                        JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
+
+                                        warehouseUpdate.dispose();
+
+                                        Warehouse wi = new Warehouse();
+                                        wi.setVisible(true);
+
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Gagal menyimpan data !");
+
+                                    }
 
                         } else {
                             JOptionPane.showMessageDialog(null, "Harga Harus Angka");

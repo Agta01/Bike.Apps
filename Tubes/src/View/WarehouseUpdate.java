@@ -245,9 +245,6 @@ public class WarehouseUpdate extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        ProductController.update(this);
         productController.updateChange(this);        
-        this.dispose();
-        Warehouse w = new Warehouse();
-        w.setVisible(true);
     }//GEN-LAST:event_saveBtnActionPerformed
 
     /**
