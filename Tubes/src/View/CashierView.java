@@ -59,7 +59,7 @@ public class CashierView extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         deletedBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        bayarBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         searchText = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -107,10 +107,15 @@ public class CashierView extends javax.swing.JFrame {
         getContentPane().add(deletedBtn);
         deletedBtn.setBounds(100, 400, 86, 26);
 
-        jButton1.setBackground(new java.awt.Color(55, 238, 231));
-        jButton1.setText("Bayar");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(350, 400, 107, 26);
+        bayarBtn.setBackground(new java.awt.Color(55, 238, 231));
+        bayarBtn.setText("Bayar");
+        bayarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bayarBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bayarBtn);
+        bayarBtn.setBounds(350, 400, 107, 26);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
@@ -170,7 +175,7 @@ public class CashierView extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(13, 89, 453, 102);
+        jScrollPane1.setBounds(13, 89, 452, 102);
 
         tambahkanBtn.setText("Tambahkan");
         tambahkanBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -226,7 +231,7 @@ public class CashierView extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tableBeli);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 280, 453, 107);
+        jScrollPane3.setBounds(10, 280, 452, 107);
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(0, 239, 477, 10);
 
@@ -258,13 +263,15 @@ public class CashierView extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setText("Daftar barang yang dibeli");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 250, 180, 19);
+        jLabel4.setBounds(10, 250, 180, 17);
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(254, 254, 254));
         jLabel5.setText("Jumlah :");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(240, 200, 80, 20);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/bg1.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 480, 460);
 
@@ -328,6 +335,12 @@ public class CashierView extends javax.swing.JFrame {
              productController.selectedDataCashier(tableBeli);
         }
     }//GEN-LAST:event_deletedBtnActionPerformed
+
+    private void bayarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bayarBtnActionPerformed
+        // TODO add your handling code here:
+        
+        productController.dataProductInList();
+    }//GEN-LAST:event_bayarBtnActionPerformed
     
     /**
      * @param args the command line arguments
@@ -388,9 +401,9 @@ public class CashierView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bayarBtn;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JButton deletedBtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

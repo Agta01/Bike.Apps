@@ -195,6 +195,18 @@ public class ProductController {
         table2.setModel(dtm2);
         return dtm2.getRowCount() != 0;   
     }
+    
+    public void dataProductInList(){
+        
+        int i=0;
+        
+        for (DataCashier dataCashier : getAll()) {
+            System.out.println("Nama Barang ["+i+"]"+dataCashier.getNamaBarang());
+            i++;
+            System.out.println("");
+        }
+        
+    }
 
     public void updateChange(WarehouseUpdate warehouseUpdate) {
         productModel = new ProductModel();
