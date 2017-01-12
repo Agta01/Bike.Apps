@@ -13,8 +13,10 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
@@ -28,23 +30,57 @@ public class CashierView extends javax.swing.JFrame {
     /**
      * Creates new form CashierView
      */
-    
 //    JButton tambahkanBtn = new JButton();
     ProductController productController = new ProductController();
-    
-    
+
     public CashierView() {
-        
+
         initComponents();
-        
-        
+
         productController.populateTable(productTable, "");
+//        productController.selectedDataCashier(tableBeli);
     }
-    
-    public JTable getProductTable(){
-       
+
+    public JTable getTableBeli() {
+        return tableBeli;
+    }
+
+    public JTable getProductTable() {
+
         return productTable;
-        
+
+    }
+
+    public JLabel getIndexLabel() {
+        return indexLabel;
+    }
+
+    public void setIndexLabel(JLabel indexLabel) {
+        this.indexLabel = indexLabel;
+    }
+
+    public JLabel getNamaBarLabel() {
+        return namaBarLabel;
+    }
+
+    public void setNamaBarLabel(JLabel namaBarLabel) {
+        this.namaBarLabel = namaBarLabel;
+    }
+
+    public JTextField getJumlahBarText() {
+        return jumlahBarText;
+    }
+
+    public void setJumlahBarText(JTextField jumlahBarText) {
+        this.jumlahBarText = jumlahBarText;
+    }
+
+    public JLabel getKodeBarLabel() {
+        return kodeBarLabel;
+    }
+
+    public void setKodeBarLabel(JLabel kodeBarLabel) {
+        this.kodeBarLabel = kodeBarLabel;
     }
 
     /**
@@ -70,13 +106,27 @@ public class CashierView extends javax.swing.JFrame {
         tableBeli = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         cancelBtn = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        ubahBtn = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        indexLabel = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        kodeBarLabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        namaBarLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jumlahBarText = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
+        simpanBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,9 +143,8 @@ public class CashierView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
-        setMinimumSize(new java.awt.Dimension(480, 430));
-        setResizable(false);
-        setSize(new java.awt.Dimension(480, 460));
+        setMinimumSize(new java.awt.Dimension(900, 620));
+        setSize(new java.awt.Dimension(480, 621));
         getContentPane().setLayout(null);
 
         deletedBtn.setText("Hapus");
@@ -115,7 +164,7 @@ public class CashierView extends javax.swing.JFrame {
             }
         });
         getContentPane().add(bayarBtn);
-        bayarBtn.setBounds(350, 400, 107, 26);
+        bayarBtn.setBounds(360, 450, 107, 160);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
@@ -244,9 +293,14 @@ public class CashierView extends javax.swing.JFrame {
         getContentPane().add(cancelBtn);
         cancelBtn.setBounds(10, 400, 83, 26);
 
-        jButton4.setText("Ubah");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(200, 400, 81, 26);
+        ubahBtn.setText("Ubah");
+        ubahBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ubahBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ubahBtn);
+        ubahBtn.setBounds(200, 400, 81, 26);
 
         jButton5.setBackground(new java.awt.Color(243, 22, 19));
         jButton5.setText("Logout");
@@ -273,13 +327,114 @@ public class CashierView extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/bg1.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 480, 460);
+        jLabel3.setBounds(0, 0, 480, 440);
+        getContentPane().add(jSeparator2);
+        jSeparator2.setBounds(0, 440, 490, 10);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ubah Data Barang yang dibeli", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 10))); // NOI18N
+
+        jLabel8.setText("Kode Barang :");
+
+        indexLabel.setMaximumSize(new java.awt.Dimension(36, 14));
+        indexLabel.setMinimumSize(new java.awt.Dimension(36, 14));
+
+        jLabel9.setText("Barang ke -");
+
+        kodeBarLabel.setMaximumSize(new java.awt.Dimension(36, 14));
+        kodeBarLabel.setMinimumSize(new java.awt.Dimension(36, 14));
+
+        jLabel7.setText("Nama Barang :");
+
+        namaBarLabel.setMaximumSize(new java.awt.Dimension(36, 14));
+        namaBarLabel.setMinimumSize(new java.awt.Dimension(36, 14));
+
+        jLabel6.setText("Jumlah :");
+
+        jButton1.setText("Batal");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        simpanBtn.setText("Simpan");
+        simpanBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
+                        .addComponent(simpanBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(kodeBarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(namaBarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(indexLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(4, 4, 4)
+                                .addComponent(jumlahBarText, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(indexLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(kodeBarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(namaBarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jumlahBarText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(simpanBtn))
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 450, 340, 160);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Form Pembayaran", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu", 1, 12))), "Form Pembayaran")); // NOI18N
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(480, 0, 420, 620);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
- 
+
     private void qtyTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qtyTextKeyPressed
         // TODO add your handling code here:
         //        qtyText.setText("");
@@ -296,7 +451,7 @@ public class CashierView extends javax.swing.JFrame {
 
     private void searchTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextKeyPressed
         // TODO add your handling code here:
-            productController.populateTable(productTable, searchText.getText());
+        productController.populateTable(productTable, searchText.getText());
     }//GEN-LAST:event_searchTextKeyPressed
 
     private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
@@ -310,12 +465,12 @@ public class CashierView extends javax.swing.JFrame {
 
     private void tambahkanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahkanBtnActionPerformed
         // TODO add your handling code here:
-         if (productTable.getSelectedRowCount()== 0) {
-            JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel");     
+        if (productTable.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel");
         } else {
-             productController.selectedProduct(productTable,tableBeli, qtyText);
+            productController.selectedProduct(productTable, tableBeli, qtyText);
         }
-        
+
     }//GEN-LAST:event_tambahkanBtnActionPerformed
 
     private void tambahkanBtnMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tambahkanBtnMouseMoved
@@ -329,36 +484,59 @@ public class CashierView extends javax.swing.JFrame {
 
     private void deletedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletedBtnActionPerformed
         // TODO add your handling code here:
-        if (tableBeli.getSelectedRowCount()== 0) {
-            JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel!");     
+        if (tableBeli.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel!");
         } else {
-             productController.selectedDataCashier(tableBeli);
+            productController.deleteDataCashier(tableBeli);
         }
     }//GEN-LAST:event_deletedBtnActionPerformed
 
     private void bayarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bayarBtnActionPerformed
         // TODO add your handling code here:
-        
-        productController.dataProductInList();
+
+        productController.countProductInList();
     }//GEN-LAST:event_bayarBtnActionPerformed
-    
+
+    private void ubahBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahBtnActionPerformed
+
+        if (tableBeli.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Pilih salah satu baris tabel!");
+        } else {
+            productController.selectedDataCashier(this);
+        }
+
+
+    }//GEN-LAST:event_ubahBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        getIndexLabel().setText("");
+        getNamaBarLabel().setText("");
+        getKodeBarLabel().setText("");
+        getJumlahBarText().setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void simpanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBtnActionPerformed
+        // TODO add your handling code here: 
+        productController.updateDataCashier(indexLabel, jumlahBarText, this);
+        
+    }//GEN-LAST:event_simpanBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            
-            UIManager.setLookAndFeel ( NimbusLookAndFeel.class.getCanonicalName () );
+
+            UIManager.setLookAndFeel(NimbusLookAndFeel.class.getCanonicalName());
 //                    WebLookAndFeel.initializeManagers ();
-                    
+
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -376,12 +554,11 @@ public class CashierView extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-            
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {         
+            public void run() {
                 WebLookAndFeel.install(true);
-                
+
                 try {
                     UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName());
                 } catch (ClassNotFoundException ex) {
@@ -404,7 +581,8 @@ public class CashierView extends javax.swing.JFrame {
     private javax.swing.JButton bayarBtn;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JButton deletedBtn;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel indexLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
@@ -412,15 +590,28 @@ public class CashierView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jumlahBarText;
+    private javax.swing.JLabel kodeBarLabel;
+    private javax.swing.JLabel namaBarLabel;
     private javax.swing.JTable productTable;
     private javax.swing.JTextField qtyText;
     private javax.swing.JTextField searchText;
+    private javax.swing.JButton simpanBtn;
     private javax.swing.JTable tableBeli;
     private javax.swing.JButton tambahkanBtn;
+    private javax.swing.JButton ubahBtn;
     // End of variables declaration//GEN-END:variables
 }

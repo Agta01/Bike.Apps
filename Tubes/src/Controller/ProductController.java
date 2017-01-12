@@ -14,6 +14,7 @@ import View.WarehouseUpdate;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,15 +43,19 @@ public class ProductController {
         return listDataCashier;
     }
 
+    public DataCashier getByIndex(int index) {
+        return listDataCashier.get(index);
+    }
+
     public void deleteData(int index) { //method untuk menghapus data di ArrayList berdasarkan index Arraynya
         listDataCashier.remove(index);
     }
 
     public void deleteDataAll(JTable table2) {
-        
+
         listDataCashier.removeAll(listDataCashier);
         getTable2(table2);
-        
+
     }
 
     public static void tambahProduct(WarehouseInsert warehouseInsert) {
@@ -132,7 +137,7 @@ public class ProductController {
         CashierView cashierView = new CashierView();
 
         int row = table.getSelectedRow();
-        
+
         String[] product = new String[5];
 
         int kodeBarang = Integer.parseInt(table.getValueAt(row, 1).toString());
@@ -144,7 +149,6 @@ public class ProductController {
         double total = harga * jumlah;
 
         insertData(kodeBarang, stok, jumlah, harga, namaBarang, total);
-
 
         int i = 1;
 
@@ -167,19 +171,58 @@ public class ProductController {
         return dtm2.getRowCount() != 0;
 
     }
-    
-    public void selectedDataCashier(JTable table2) {
+
+    public void deleteDataCashier(JTable table2) {
         int row = table2.getSelectedRow();
         int index = Integer.parseInt(table2.getValueAt(row, 0).toString());
-        deleteData(index-1);  
+        deleteData(index - 1);
         getTable2(table2);
     }
-    
-    public boolean getTable2(JTable table2){
+
+    public void selectedDataCashier(CashierView cashierView) {
+
+        int row = cashierView.getTableBeli().getSelectedRow();
+        int index = Integer.parseInt(cashierView.getTableBeli().getValueAt(row, 0).toString()) - 1;
+
+        System.out.println(index + 1);
+        cashierView.getIndexLabel().setText(String.valueOf(index + 1));
+        cashierView.getNamaBarLabel().setText(getByIndex(index).getNamaBarang());
+        cashierView.getKodeBarLabel().setText(String.valueOf(getByIndex(index).getId()));
+        cashierView.getJumlahBarText().setText(String.valueOf(getByIndex(index).getJumlah()));
+
+    }
+
+    public void updateDataCashier(JLabel index, JTextField jumlah, CashierView cashierView) {
+
+        int option = JOptionPane.showConfirmDialog(cashierView, "Anda yakin akan mengubah data ini?");
+        if (option == JOptionPane.OK_OPTION) {
+
+            int indexKe = Integer.parseInt(index.getText()) - 1;
+            int jumlahBar = Integer.parseInt(jumlah.getText());
+            double harga = getByIndex(indexKe).getHarga();
+            double totalHarga = jumlahBar * harga;
+
+            getByIndex(indexKe).setJumlah(jumlahBar);
+            getByIndex(indexKe).setTotal(totalHarga);
+
+            JOptionPane.showMessageDialog(cashierView, "Data Berhasil Diubah!!");
+
+            getTable2(cashierView.getTableBeli());
+            
+            cashierView.getIndexLabel().setText("");
+            cashierView.getNamaBarLabel().setText("");
+            cashierView.getKodeBarLabel().setText("");
+            cashierView.getJumlahBarText().setText("");
+
+        }
+
+    }
+
+    public boolean getTable2(JTable table2) {
         DefaultTableModel dtm2 = (DefaultTableModel) table2.getModel();
         dtm2.setRowCount(0);
-        
-        int i=1;
+
+        int i = 1;
         for (DataCashier dataCashier : getAll()) {
             dtm2.addRow(
                     new Object[]{
@@ -193,19 +236,18 @@ public class ProductController {
             );
         }
         table2.setModel(dtm2);
-        return dtm2.getRowCount() != 0;   
+        return dtm2.getRowCount() != 0;
     }
-    
-    public void dataProductInList(){
-        
-        int i=0;
-        
+
+    public void countProductInList() {
+
+        int i = 0;
+        double totalHarga = 0.0;
         for (DataCashier dataCashier : getAll()) {
-            System.out.println("Nama Barang ["+i+"]"+dataCashier.getNamaBarang());
-            i++;
-            System.out.println("");
+            totalHarga = totalHarga+dataCashier.getTotal();
         }
-        
+
+        System.out.println(totalHarga);
     }
 
     public void updateChange(WarehouseUpdate warehouseUpdate) {
@@ -231,19 +273,19 @@ public class ProductController {
                             productModel.setStock(stockParse);
                             productModel.setPrice(priceParse);
                             productModel.updateProduct(productModel);
-                            
+
                             if (productModel.updateProduct(productModel)) {
-                                        JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
+                                JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
 
-                                        warehouseUpdate.dispose();
+                                warehouseUpdate.dispose();
 
-                                        Warehouse wi = new Warehouse();
-                                        wi.setVisible(true);
+                                Warehouse wi = new Warehouse();
+                                wi.setVisible(true);
 
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, "Gagal menyimpan data !");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Gagal menyimpan data !");
 
-                                    }
+                            }
 
                         } else {
                             JOptionPane.showMessageDialog(null, "Harga Harus Angka");
